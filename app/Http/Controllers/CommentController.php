@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Review;
+use App\Models\Article;
+use App\Http\Requests\CommentRequest;
+
+class CommentController extends Controller
+{
+    public function review(Review $review, CommentRequest $request)
+    {
+        $review->comments()->create([
+            'user_id' => auth()->id(),
+            'message' => $request['message']
+        ]);
+
+        return back();
+    }
+
+    public function article(Article $article, CommentRequest $request)
+    {
+        $article->comments()->create([
+            'user_id' => auth()->id(),
+            'message' => $request['message']
+        ]);
+
+        return back();
+    }
+}
